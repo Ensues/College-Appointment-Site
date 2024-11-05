@@ -1,0 +1,11 @@
+/* Global */
+*{
+
+}
+:root{
+    --bg-color: #f0f0f0;
+    --second-bg-color: #ffc632; 
+    --text-color: #080808; 
+    --main-color: #800000; 
+}
+/*  Local */
