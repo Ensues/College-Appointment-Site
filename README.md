@@ -75,4 +75,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-*Developed as part of the WebProg subject as our final term case study solving a real life problem which is the inefficient and outdated appointment system at TSU's Registrar's Office, which causes long wait times and student dissatisfaction. It aims to streamline scheduling and improve efficiency. *
+*Developed as part of the WebProg subject as our final term case study solving a real life problem which is the inefficient and outdated appointment system at TSU's Registrar's Office, which causes long wait times and student dissatisfaction. It aims to streamline scheduling and improve efficiency.*
