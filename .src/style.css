@@ -8,4 +8,15 @@
     --text-color: #080808; 
     --main-color: #800000; 
 }
+/* 
+    This contains already all the right colors of the TSU seal
+    Create more color declarations if want to use others
+    Ideally we should be using the main colors though
+
+    to use them, here is an example{
+    color: var(--main-color);
+    }
+    
+    Thats it good luck
+*/
 /*  Local */
