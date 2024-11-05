@@ -1,9 +1,9 @@
 # TSU Registrar's Office Appointment Scheduling System
 
-A project designed to modernize and streamline the appointment scheduling process for the Tarlac State University (TSU) Registrar's Office. The system aims to improve the efficiency of interactions, reduce wait times, and enhance student satisfaction.
+A project designed to modernize and streamline the appointment scheduling process for the Tarlac State University (TSU) Registrar's Office. The system aims to improve the efficiency of interactions, reduce wait times, and enhance student satisfaction by making a website to book appointmewnts for such interactions.
 
 ## Project Overview
-The TSU Registrar's Office manages essential tasks, including student record maintenance, registration activities, academic audits, and more. Due to the large volume of students, the current scheduling system has become inefficient, causing long lines and delays. This project addresses these issues by introducing a user-friendly, web-based appointment scheduling platform.
+The TSU Registrar's Office oversees critical functions such as student record maintenance, registration operations, academic audits, and more. Due to the high number of students, the current scheduling method has become inefficient, resulting in long lineups and delays. This project tackles these challenges by creating an easy-to-use, web-based appointment scheduling software.
 
 ## Features
 
