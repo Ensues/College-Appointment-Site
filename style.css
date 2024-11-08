@@ -10,11 +10,25 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 :root{
-    --bg-color: #f0f0f0;
-    --second-bg-color: #ffc632; 
-    --text-color: #080808; 
-    --second-text-color: #f0f0f0;
-    --main-color: #800000; 
+    --bg-color: #0e1824;
+    --second-bg-color: #1c2837; 
+    --text-color: #97b0cf; 
+    --second-text-color: #2c394b;
+    --main-color: #121e2d; 
+
+    /* TSU Colors */
+    --tsu-yellow-color: #ffc632; 
+    --tsu-white-color: #f0f0f0;
+    --tsu-red-color: #800000; 
+}
+@media (prefer-color-scheme: light) {
+    :root {
+        --bg-color: #f0f0f0;
+        --second-bg-color: #eaecf1; 
+        --text-color: #424545; 
+        --second-text-color: #3d507f;
+        --main-color: #ffffff; 
+    }
 }
 html{
     font-size: 60%;
@@ -59,14 +73,14 @@ body{
     padding-right: 5px;
 }
 .header span{
-    color: var(--second-bg-color);
+    color: var(--second-text-color);
 }
 .logo{
     font-size: 3rem;
     font-weight: 800;
     cursor: pointer;
     transition: 0.3s ease;;
-    color: var(--header-color);
+    color: var(--text-color);
 }
 .logo:hover{
     transform:scale(1.05);
@@ -88,7 +102,7 @@ body{
     margin-right: 2rem;
     font-weight: 500;
     overflow: hidden;
-    color: var(--header-color);
+    color: var(--text-color);
     transition: 0.3s ease-in-out;
     border-bottom: 3px solid transparent;
 
@@ -118,8 +132,8 @@ body{
 .navbar a:hover,
 .navbar a.active{
     scale: 1.1;
-    color: var(--second-bg-color);
-    border-bottom: 3px solid var(--second-bg-color);
+    color: var(--second-text-color);
+    border-bottom: 3px solid var(--second-text-color);
 }
 
 /* Error */
@@ -133,13 +147,13 @@ body{
 }
 .error .error-text{
     font-size: 100px;
-    color: var(--main-color);
+    color: var(--text-color);
     text-decoration: underline;
     transition: 0.3s ease-in-out;
 }
 .error .error-text2{
     font-size: 50px;
-    color: var(--main-color);
+    color: var(--text-color);
     text-decoration: underline;
     transition: 0.3s ease-in-out;
     margin-top: 20px;
@@ -152,7 +166,7 @@ body{
 }
 .error .logo{
     font-size: 25px;
-    color: var(--main-color);
+    color: var(--text-color);
     font-size: 100px;
     line-height: 42px;
     display: inline-block;
@@ -163,7 +177,7 @@ body{
 }
 .error .logo:hover{
     transform: scale(1.2)translateY(-10px);
-    background-color: var(--main-color);
+    background-color: var(--text-color);
     color: var(--bg-color);
 }
 
@@ -178,12 +192,12 @@ body{
 .footer .social{
     text-align: center;
     padding-bottom: 20px;
-    color: var(--main-color);
+    color: var(--text-color);
 }
 .footer .social a{
     font-size: 25px;
-    color: var(--main-color);
-    border: 2px solid var(--main-color);
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
     width: 42px;
     height: 42px;
     line-height: 42px;
@@ -195,8 +209,8 @@ body{
 }
 .footer .social a:hover{
     transform: scale(1.2)translateY(-10px);
-    background-color: var(--main-color);
-    color: var(--second-bg-color);
+    background-color: var(--text-color);
+    color: var(--bg-color);
 }
 .footer ul{
     margin-top: 0;
@@ -212,8 +226,8 @@ body{
     transition: 0.3s ease-in-out;
 }
 .footer ul li a:hover{
-    border-bottom: 3px solid var(--main-color);
-    color: var(--main-color);
+    border-bottom: 3px solid var(--second-text-color);
+    color: var(--second-text-color);
 }
 .footer ul li{
     display: inline-block;
@@ -254,18 +268,19 @@ body{
     display: inline-block;
     border: 2px solid transparent;
     transition: 0.3s ease-in-out;
-    color: var(--second-text-color);
-    background: var(--main-color);
+    color: var(--bg-color);
+    background: var(--text-color);
+    border: 3px solid var(--second-text-color);
 }
 .log-in .btn:hover{
     transform:scale(1.05);
-    color: var(--main-color);
+    color: var(--second-text-color);
     background: var(--second-bg-color);
 }
 .log-in .log-header{
     font-size: 3.5rem;
     padding-bottom: 20px;
-    color: var(--main-color);
+    color: var(--text-color);
 }
 .log-in .input-box{
     flex: 1;
@@ -283,9 +298,9 @@ body{
     font-size: 1.8rem;
     border-radius: 2rem;
     resize: none;
-    color: var(--header-color);
-    background: var(--third-bg-color);
-    border: 2px solid var(--main-color);
+    color: var(--text-color);
+    background: var(--second-bg-color);
+    border: 2px solid var(--text-color);
 }
 .log-in .bypass-btn {
     text-align: center;
