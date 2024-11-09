@@ -39,6 +39,26 @@ body{
     background: var(--bg-color);
     color: var(--text-color);
 }
+.btn{
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--text-color);
+    border-radius: 4rem;
+    font-size: 1.6rem;
+    color: var(--bg-color);
+    border: 2px solid transparent;
+    letter-spacing: 0.1rem;
+    font-size: 2rem;
+    font-weight: 600;
+    transition: 0.3s ease-in-out;
+    cursor:pointer;
+}
+.btn:hover{
+    transform:scale(1.05);
+    background-color: var(--main-color);
+    color: var(--text-color);
+    border: 2px solid var(--text-color); 
+}
 /* 
     This contains already all the right colors of the TSU seal
     Create more color declarations if want to use others
