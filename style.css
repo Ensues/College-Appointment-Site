@@ -14,6 +14,7 @@
     --second-bg-color: #1c2837; 
     --text-color: #97b0cf; 
     --second-text-color: #2c394b;
+    --third-text-color: #f0f0f0;
     --main-color: #121e2d; 
 
     /* TSU Colors */
@@ -73,14 +74,14 @@ body{
     padding-right: 5px;
 }
 .header span{
-    color: var(--second-text-color);
+    color: var(--tsu-red-color);
 }
 .logo{
     font-size: 3rem;
     font-weight: 800;
     cursor: pointer;
     transition: 0.3s ease;;
-    color: var(--text-color);
+    color: var(--tsu-yellow-color);
 }
 .logo:hover{
     transform:scale(1.05);
@@ -132,8 +133,8 @@ body{
 .navbar a:hover,
 .navbar a.active{
     scale: 1.1;
-    color: var(--second-text-color);
-    border-bottom: 3px solid var(--second-text-color);
+    color: var(--third-text-color);
+    border-bottom: 3px solid var(--third-text-color);
 }
 
 /* Error */
@@ -248,12 +249,26 @@ body{
     padding: 20px;
     margin-top: 20px;
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
+    flex-direction: column; 
 }
 .log-in .login-wrapper{
     padding-top: 50px;
+}
+.log-in .logo{
+    font-size: 25px;
+    color: var(--text-color);
+    font-size: 100px;
+    line-height: 42px;
+    justify-content: center;
+    text-align: center;
+    border-radius: 50%;
+    margin: 0 10px;
+    transition: 0.3s ease-in-out;
+}
+.log-in .logo:hover{
+    transform: scale(1.2)translateY(-10px);
 }
 .log-in .btn{
     margin-top: 2rem;
@@ -268,14 +283,14 @@ body{
     display: inline-block;
     border: 2px solid transparent;
     transition: 0.3s ease-in-out;
-    color: var(--bg-color);
-    background: var(--text-color);
-    border: 3px solid var(--second-text-color);
+    color: var(--text-color);
+    background: var(--main-color);
+    border: 3px solid var(--text-color);
 }
 .log-in .btn:hover{
     transform:scale(1.05);
-    color: var(--second-text-color);
-    background: var(--second-bg-color);
+    color: var(--bg-color);
+    background: var(--text-color);
 }
 .log-in .log-header{
     font-size: 3.5rem;
