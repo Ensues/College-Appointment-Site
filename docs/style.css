@@ -21,6 +21,18 @@
     --tsu-yellow-color: #ffc632; 
     --tsu-white-color: #f0f0f0;
     --tsu-red-color: #800000; 
+
+    /* 
+    This contains already all the right colors of the TSU seal
+    Create more color declarations if want to use others
+    Ideally we should be using the main colors though
+
+    to use them, here is an example{
+    color: var(--main-color);
+    }
+    
+    Thats it good luck
+*/
 }
 @media (prefer-color-scheme: light) {
     :root {
@@ -59,17 +71,7 @@ body{
     color: var(--third-text-color);
     border: 2px solid var(--third-text-color); 
 }
-/* 
-    This contains already all the right colors of the TSU seal
-    Create more color declarations if want to use others
-    Ideally we should be using the main colors though
 
-    to use them, here is an example{
-    color: var(--main-color);
-    }
-    
-    Thats it good luck
-*/
 /*  Local Eric */
 
 /* Header */
@@ -77,7 +79,7 @@ body{
     top:0;
     left: 0;
     width: 100%;
-    padding: 0.5rem 1% 0.5rem;
+    padding: 0rem 1% 0rem;
     background: var(--main-color);
     backdrop-filter: blur(10px);
     z-index:5;
