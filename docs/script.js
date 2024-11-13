@@ -40,3 +40,19 @@ async function login() {
     alert('An error occurred. Please try again later.'); // Show a generic error message
   }
 }
+
+// Light mode
+
+document.getElementById('theme-toggle').addEventListener('click', function() {
+  document.body.classList.toggle('light-mode');
+  document.querySelector('.header').classList.toggle('light-mode');
+  document.querySelector('.navbar').classList.toggle('light-mode');
+  document.querySelector('.footer').classList.toggle('light-mode');
+  document.querySelector('.logo').classList.toggle('light-mode'); 
+  document.querySelector('span').classList.toggle('light-mode');
+  document.querySelector('.btn').classList.toggle('light-mode'); 
+  document.querySelector('.btn-group').classList.toggle('light-mode');
+  document.querySelector('.go-to-btn').classList.toggle('light-mode');
+  document.querySelector('.color-btn').classList.toggle('light-mode');
+  // document.querySelector('.').classList.toggle('light-mode'); <-- Add this line
+});
