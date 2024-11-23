@@ -56,3 +56,10 @@ document.getElementById('theme-toggle').addEventListener('click', function() {
   document.querySelector('.color-btn').classList.toggle('light-mode');
   // document.querySelector('.').classList.toggle('light-mode'); <-- Add this line
 });
+
+function redirectToSchedule(windowName) {
+  const url = `sched.php?window=${encodeURIComponent(windowName)}`;
+  // Redirect the user to the constructed URL
+  window.location.href = url;
+}
+
