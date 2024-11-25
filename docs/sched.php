@@ -31,10 +31,10 @@ $conn->close();
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1.0">
     <title> Available Schedules </title>
-    <link rel="icon" type="..images/x-icon" href="images/tsu-seal.png">
+    <link rel="icon" type="image/x-icon" href="images/tsu-seal.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 </head>
 <body>
     <header class="header">
@@ -47,11 +47,15 @@ $conn->close();
                 <button id="theme-toggle" class="color-btn"><i class="ti ti-sun-moon"></i></button>
             </nav>
     </header>
+    
     <section class="error">
-        
-<h1>List of Available Schedules</h1>
-        <a href="booking-page.html" class="custom-btn">BACK</a>
         <br>
+        <br>
+        <h1 class="office-window-title">List of Available Schedules</h1>
+        <br>
+        <br>
+        <br>
+        <a href="booking-page.html" class="custom-btn">BACK</a>
         <div class="container">
             <table>
                 <thead>
@@ -60,6 +64,7 @@ $conn->close();
                         <th scope="col"><h1>Dates</h1></th>
                         <th scope="col"><h1>Time</h1></th>
                         <th scope="col"><h1>Status</h1></th>
+                        <th scope="col"><h1>Book?</h1></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,7 +97,7 @@ $conn->close();
                             <td>".$row["appointment_date"]."</td>
                             <td>".$row["appointment_time"]."</td>
                             <td>".$row["status"]."</td>
-                            <td><a href='/WebProg/TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/book.php?id=$row[id]'>BOOK</a></td>
+                            <td><a href='/WebProg/TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/book.php?id=$row[id]' class='custom-btn'>BOOK</a></td>
                         </tr>";
                     }
                     } else {
@@ -103,8 +108,24 @@ $conn->close();
                 </tbody>
             </table>
         </div>
+        <a href="user-dashboard.html" class="custom-btn">View Your Booked Schedules</a>
     </section>
-    <script>
+    
+    <footer class="footer">
+        <div class="social">
+            <a href="" target="_blank"><i class="ti ti-brand-facebook"></i></a>
+            <a href="" target="_blank"><i class="ti ti-brand-x-filled"></i></a>
+            <a href="" target="_blank"><i class="ti ti-brand-instagram-filled"></i></a>
+        </div>
+        <ul class="list">
+            <li><a href="booking-page.html">Booking</a></li>
+            <li><a href="user-dashboard.html">Profile</a></li>
+        </ul>
+        <p class="copyright">@ Tarlac State University | All Rights Reserved</p>
+    </footer>
+    <script src="script.js">
+    </script>
+    <script >
         
     </script>
     

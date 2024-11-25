@@ -510,144 +510,7 @@ body.light-mode {
 }
 
 /*  Local Tyron */
-/* User Dashboard Section */
-.user-dashboard {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    margin-top: 80px; /* To avoid overlapping with header */
-}
 
-/* Sidebar styles */
-.sidebar {
-    width: 250px;
-    background: var(--second-bg-color);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-menu {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar-menu li {
-    margin-bottom: 15px;
-}
-
-.sidebar-menu li a {
-    font-size: 1.6rem;
-    color: var(--text-color);
-    text-decoration: none;
-    transition: 0.3s ease;
-}
-
-.sidebar-menu li a:hover {
-    color: var(--tsu-yellow-color);
-}
-
-/* Dashboard Content styles */
-.dashboard-content {
-    flex-grow: 1;
-    margin-left: 30px;
-}
-
-.user-profile {
-    display: flex;
-    margin-bottom: 40px;
-    align-items: center;
-}
-
-.user-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 20px;
-}
-
-.user-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.user-details h2 {
-    font-size: 2.4rem;
-    color: var(--tsu-yellow-color);
-}
-
-.user-details p {
-    font-size: 1.6rem;
-    color: var(--text-color);
-}
-
-.dashboard-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.card {
-    background: var(--second-bg-color);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.card h3 {
-    font-size: 2rem;
-    color: var(--tsu-yellow-color);
-    margin-bottom: 10px;
-}
-
-.card p {
-    font-size: 1.6rem;
-    color: var(--text-color);
-    margin-bottom: 20px;
-}
-
-.card .btn {
-    background-color: var(--tsu-yellow-color);
-    color: var(--bg-color);
-    border-radius: 4rem;
-    font-size: 1.6rem;
-    font-weight: 600;
-    padding: 1rem 2rem;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-}
-
-.card .btn:hover {
-    background-color: var(--bg-color);
-    color: var(--tsu-yellow-color);
-}
-.booking-section {
-    background-color: var(--second-bg-color);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-top: 30px;
-}
-
-.booking-section h3 {
-    font-size: 2rem;
-    color: var(--tsu-yellow-color);
-    margin-bottom: 20px;
-}
-
-.booking-section ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.booking-section ul li {
-    font-size: 1.6rem;
-    color: var(--text-color);
-    margin-bottom: 10px;
-}
 /*Appointment booking*/
 .office-grid {
     display: grid;
@@ -656,25 +519,20 @@ body.light-mode {
     margin: 20px;
 }
 
-.office-window {
-    background-color: #ffc632;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.office-window:hover {
-    background-color: #800000;
-}
-
 /* Office Window Buttons */
+.office-window-title{
+    color:var(--tsu-yellow-color);
+    font-size: 5em;
+    border-radius: 5px;
+    margin: 5px;
+    text-align: center;
+}
+
 .office-window {
-    padding: 10px 20px;
+    padding: 15px 20px;
     border: none;
-    background-color: #4CAF50;
-    color: white;
+    background-color:var(--tsu-yellow-color);
+    color: rgb(0, 0, 0);
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
@@ -683,7 +541,7 @@ body.light-mode {
 }
 
 .office-window:hover {
-    background-color: #45a049;
+    background-color:var(--tsu-red-color);
 }
 table {
     width: 100%; 
@@ -699,7 +557,7 @@ table {
 }
 .container td {
     font-weight: normal !important;
-    font-size: 1em !important;
+    font-size: 2em !important;
     -webkit-box-shadow: 0 2px 2px -2px #0E1119 !important;
     -moz-box-shadow: 0 2px 2px -2px #0E1119 !important;
     box-shadow: 0 2px 2px -2px #0E1119 !important;
@@ -735,39 +593,6 @@ table {
 }
 
 
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 500px;
-    text-align: center;
-}
-
-.hidden {
-    display: none;
-}
-
-.close-button {
-    float: right;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: bold;
-}
-
 .custom-btn {
     display: inline-block;
     padding: 1rem 2rem;
@@ -775,11 +600,11 @@ table {
     font-weight: 600;
     color: var(--tsu-white-color); 
     background-color: var(--tsu-red-color); 
-    border: 2px solid var(--tsu-red-color);
+    border: 2px solid var(--tsu-yellow-color);
     border-radius: 4rem;
     text-align: center;
     transition: all 0.3s ease;
-    text-decoration: none; 
+    text-decoration: none;
     cursor: pointer;
 }
 
