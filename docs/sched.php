@@ -1,5 +1,11 @@
 <?php
-// Database credentials
+session_start(); 
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
 $servername = "localhost";
 $username = "root";
 $password = ""; 
@@ -43,7 +49,7 @@ $conn->close();
                 
                 <a href="booking-page.html">Booking</a>
                 <a href="user-dashboard.html">Profile</a>   
-                <a href="index.html">Log Out</a>
+                <a href="index.php">Log Out</a>
                 <button id="theme-toggle" class="color-btn"><i class="ti ti-sun-moon"></i></button>
             </nav>
     </header>
@@ -51,6 +57,8 @@ $conn->close();
     <section class="error">
         <br>
         <br>
+        
+        <img style="width: 60px;" src="images/tsu-seal.png">
         <h1 class="office-window-title">List of Available Schedules</h1>
         <br>
         <br>
@@ -108,7 +116,7 @@ $conn->close();
                 </tbody>
             </table>
         </div>
-        <a href="user-dashboard.html" class="custom-btn">View Your Booked Schedules</a>
+        <a href="user-dashboard.php" class="custom-btn">View Your Booked Schedules</a>
     </section>
     
     <footer class="footer">

@@ -59,7 +59,9 @@ document.getElementById('theme-toggle').addEventListener('click', function() {
 
 function redirectToSchedule(windowName) {
   const url = `sched.php?window=${encodeURIComponent(windowName)}`;
-  // Redirect the user to the constructed URL
   window.location.href = url;
+}
+function showAlert(message) {
+  alert(message);
 }
 

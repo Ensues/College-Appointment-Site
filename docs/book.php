@@ -1,7 +1,15 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    echo "You must be logged in to book an appointment.";
+    exit;
+}
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
+    $user_id = $_SESSION['user_id'];
+
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -13,19 +21,32 @@ if (isset($_GET["id"])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "UPDATE appointments SET status = 'booked' WHERE id = ?";
-
+    $sql = "SELECT appointment_date, appointment_time, office_window FROM appointments WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    
+
     if ($stmt) {
         $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        if ($stmt->execute()) {
-        
-            header("Location: /WebProg/TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/booking-page.html?status=success");
-            exit;
+        if ($result->num_rows > 0) {
+            $appointment = $result->fetch_assoc();
+
+            $insertBooking = $conn->prepare("INSERT INTO booked_schedules (user_id, schedule_date, schedule_time, schedule_details, created_at) VALUES (?, ?, ?, ?, NOW())");
+            $insertBooking->bind_param("isss", $user_id, $appointment['appointment_date'], $appointment['appointment_time'], $appointment['office_window']);
+            
+            if ($insertBooking->execute()) {
+                $updateStatus = $conn->prepare("UPDATE appointments SET status = 'booked' WHERE id = ?");
+                $updateStatus->bind_param("i", $id);
+                $updateStatus->execute();
+
+                header("Location: /WebProg/TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/booking-page.html?status=success");
+                exit;
+            } else {
+                echo "Error booking appointment: " . $conn->error;
+            }
         } else {
-            echo "Error updating record: " . $conn->error;
+            echo "Appointment not found!";
         }
 
         $stmt->close();

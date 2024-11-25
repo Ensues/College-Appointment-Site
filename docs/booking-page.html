@@ -13,8 +13,8 @@
         <a href="#home" class="logo"> <img src="images/tsu-seal.png"> TSU <span>Registrar</span></a>
         <nav class="navbar">
             <a href="booking-page.html" class="active">Booking</a>
-            <a href="user-dashboard.html">Profile</a>
-            <a href="index.html">Log Out</a>
+            <a href="user-dashboard.php">Profile</a>
+            <a href="index.php">Log Out</a>
             <button id="theme-toggle" class="color-btn"><i class="ti ti-sun-moon"></i></button>
         </nav>
     </header>
@@ -24,6 +24,7 @@
     </section>
 
     <section class="error">
+        <img src="images/tsu-seal.png">
         <section class="offices">
             <h2 class="office-window-title">Office Windows</h2>
             <div class="office-grid">
@@ -47,6 +48,7 @@
 
             </div>
         </section>
+        <a href="user-dashboard.php" class="custom-btn">View Your Booked Schedules</a>
         
     </section>
 
@@ -65,12 +67,13 @@
     <script src="script.js">
     </script>
     <script>
-        // Check if the URL has the 'status' parameter and if it's 'success'
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('status') === 'success') {
-            // Display the alert if booking was successful
             alert('Booking was successful!');
+        }else if(urlParams.get('status') === 'canceled'){
+            alert("Appointment canceled successfully!");
         }
+        
     </script>
 </body>
 </html>
