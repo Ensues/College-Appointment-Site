@@ -40,11 +40,9 @@ $conn->close();
     <header class="header">
         <a href="#home" class="logo"> <img src="images/tsu-seal.png"> TSU <span>Registrar</span></a>
             <nav class="navbar">
-                <a href="welcome.html">Home</a>
+                
                 <a href="booking-page.html">Booking</a>
-                <a href="user-dashboard.html">Profile</a>
-                <a href="support-and-help-page.html">Support</a>
-                <a href="about-page.html">About</a>
+                <a href="user-dashboard.html">Profile</a>   
                 <a href="index.html">Log Out</a>
                 <button id="theme-toggle" class="color-btn"><i class="ti ti-sun-moon"></i></button>
             </nav>
@@ -52,6 +50,7 @@ $conn->close();
     <section class="error">
         
 <h1>List of Available Schedules</h1>
+        <a href="booking-page.html" class="custom-btn">BACK</a>
         <br>
         <div class="container">
             <table>
