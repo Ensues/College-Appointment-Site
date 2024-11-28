@@ -50,7 +50,6 @@ $conn->close();
                 <a href="booking-page.html">Booking</a>
                 <a href="user-dashboard.php">Profile</a>   
                 <a href="index.php">Log Out</a>
-                <button id="theme-toggle" class="color-btn"><i class="ti ti-sun-moon"></i></button>
             </nav>
     </header>
     
