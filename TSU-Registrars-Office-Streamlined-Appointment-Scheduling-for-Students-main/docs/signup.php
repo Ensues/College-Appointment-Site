@@ -44,7 +44,7 @@ $conn->close();
 
     <header class="header">
         <a href="#home" class="logo">
-            <img src="images/tsu-seal.png"> TSU <span>Registrar</span>
+            <img src="images/tsu-seal.png">TSU <span>Registrar</span>
         </a>
     </header>
 
@@ -53,9 +53,8 @@ $conn->close();
             <div class="img-container">
                 <div class="login-wrapper">
                     <div class="logo">
-                        <i class="ti ti-user-filled"></i>
-                    </div>
-                    <div class="input-box">
+                        <img src="images/tsu-seal.png">
+                    </div>                    <div class="input-box">
                         <h1 class="log-header">Sign Up</h1>
                         <input type="text" name="name" placeholder="Full Name" required>
                         <input type="email" name="email" placeholder="Email" required>

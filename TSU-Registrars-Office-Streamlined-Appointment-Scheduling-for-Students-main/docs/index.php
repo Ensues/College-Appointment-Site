@@ -47,13 +47,13 @@ $conn->close();
             </a>
         </header>
         <section class="log-in">
-            <div class="office-window-title"><img src="images/tsu-seal.png" style="width: 100px;"></div>
+            <div class="office-window-title"></div>
             <h2 class="office-window-title">Welcome to Tarlac State University Registrar</h2>
             <form method="POST">
                 <div class="img-container">
                     <div class="login-wrapper">
                         <div class="logo">
-                            <i class="ti ti-user-filled"></i>
+                            <img src="images/tsu-seal.png">
                         </div>
                         <div class="input-box">
                             <h1 class="log-header">Log In</h1>
