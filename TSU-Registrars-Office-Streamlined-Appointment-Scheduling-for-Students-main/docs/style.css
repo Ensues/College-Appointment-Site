@@ -294,7 +294,7 @@ body{
 .log-in{
     margin-top: 0;
     height: 100vh;
-    padding: 2rem;
+    padding-top: 30vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -325,8 +325,6 @@ body{
 }
 .log-in .input-box{
     flex: 1;
-    padding-top: 3rem;
-    margin-bottom: 2rem;
     float: left;
     display: flex;
     flex-wrap:wrap;
@@ -715,7 +713,6 @@ table tr:hover {
         height: 175px;
     }
     .log-in .input-box{
-        padding-top: 75px;
         margin-bottom: 0px
     }
 
@@ -739,6 +736,7 @@ table tr:hover {
         font-size: 1.2rem;
         font-weight: 600;
     }
+
 }
 
 @media (max-width: 480px) {
@@ -806,5 +804,12 @@ table tr:hover {
 
     deets{
         font-size: 0.6rem;
+    }
+
+    table th, table td {
+        padding: 10px;  
+        text-align: center;
+        border: 1px solid var(--tsu-yellow-color);
+        font-size: 10px; 
     }
 }

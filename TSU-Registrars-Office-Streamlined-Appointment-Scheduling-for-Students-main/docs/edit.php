@@ -82,12 +82,12 @@ $conn->close();
         <nav class="navbar">
             <a href="booking-page.html">Booking</a>
             <a href="user-dashboard.html" class="active">Profile</a>
-            <a href="index.php">Log Out</a>
+            <a href="index.php">LogOut</a>
         </nav>
     </header>
 
     <section class="log-in">
-        <h2 class="log-header">Hello, <?php echo htmlspecialchars($user['name']); ?>. Do you want to edit your profile?</h2>
+        <h2 class="log-header" style="padding-top: 50px;">Hello, <?php echo htmlspecialchars($user['name']); ?>. Do you want to edit your profile?</h2>
 
         <?php if (isset($email_message)) { echo "<script>showAlert('$email_message');</script>"; } ?>
         <?php if (isset($password_message)) { echo "<script>showAlert('$password_message');</script>"; } ?>
@@ -106,18 +106,6 @@ $conn->close();
         </form>
     </section>
 
-    <footer class="footer">
-        <div class="social">
-            <a href="" target="_blank"><i class="ti ti-brand-facebook"></i></a>
-            <a href="" target="_blank"><i class="ti ti-brand-x-filled"></i></a>
-            <a href="" target="_blank"><i class="ti ti-brand-instagram-filled"></i></a>
-        </div>
-        <ul class="list">
-            <li><a href="booking-page.html">Booking</a></li>
-            <li><a href="user-dashboard.html">Profile</a></li>
-        </ul>
-        <p class="copyright">@ Tarlac State University | All Rights Reserved</p>
-    </footer>
     <script src="script.js"></script>
 </body>
 </html>

@@ -49,7 +49,7 @@ $conn->close();
                 
                 <a href="booking-page.html">Booking</a>
                 <a href="user-dashboard.php">Profile</a>   
-                <a href="index.php">Log Out</a>
+                <a href="index.php">LogOut</a>
             </nav>
     </header>
     
@@ -57,7 +57,7 @@ $conn->close();
     <section class="container">
     <br><br><br><br>
         <div class="office-window-title"> 
-            <img style="width: 60px;" src="images/tsu-seal.png">
+            <img style="width: 60px; padding-top: 50px;" src="images/tsu-seal.png">
         </div>
         <h1 class="office-window-title">List of Available Schedules</h1>
         <div class="office-window-title">
@@ -121,19 +121,6 @@ $conn->close();
         </div>
     </section>
 
-    
-    <footer class="footer">
-        <div class="social">
-            <a href="" target="_blank"><i class="ti ti-brand-facebook"></i></a>
-            <a href="" target="_blank"><i class="ti ti-brand-x-filled"></i></a>
-            <a href="" target="_blank"><i class="ti ti-brand-instagram-filled"></i></a>
-        </div>
-        <ul class="list">
-            <li><a href="booking-page.html">Booking</a></li>
-            <li><a href="user-dashboard.html">Profile</a></li>
-        </ul>
-        <p class="copyright">@ Tarlac State University | All Rights Reserved</p>
-    </footer>
     <script src="script.js">
     </script>
     <script >

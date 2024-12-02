@@ -52,9 +52,6 @@ $conn->close();
             <form method="POST">
                 <div class="img-container">
                     <div class="login-wrapper">
-                        <div class="logo">
-                            <img src="images/tsu-seal.png">
-                        </div>
                         <div class="input-box">
                             <h1 class="log-header">Log In</h1>
                             <input type="email" name="email" id="email" placeholder="Email" required>
@@ -72,16 +69,6 @@ $conn->close();
                 </script>
             <?php } ?>
 
-        <footer class="footer">
-            <div class="social">
-                <a href="" target="_blank"><i class="ti ti-brand-facebook"></i></a>
-                <a href="" target="_blank"><i class="ti ti-brand-x-filled"></i></a>
-                <a href="" target="_blank"><i class="ti ti-brand-instagram-filled"></i></a>
-            </div>
-            <p class="copyright"> 
-                @ Tarlac State University | All Rights Reserved
-            </p>
-        </footer>
 
         <script src="script.js"></script>
     </body>

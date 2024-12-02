@@ -52,9 +52,7 @@ $conn->close();
         <form method="POST">
             <div class="img-container">
                 <div class="login-wrapper">
-                    <div class="logo">
-                        <img src="images/tsu-seal.png">
-                    </div>                    <div class="input-box">
+                 <div class="input-box">
                         <h1 class="log-header">Sign Up</h1>
                         <input type="text" name="name" placeholder="Full Name" required>
                         <input type="email" name="email" placeholder="Email" required>

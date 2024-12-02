@@ -46,17 +46,17 @@ $result = $stmt->get_result();
         <nav class="navbar">
             <a href="booking-page.html">Booking</a>
             <a href="user-dashboard.php" class="active">Profile</a>
-            <a href="index.php">Log Out</a>
+            <a href="index.php">LogOut</a>
         </nav>
     </header>
     <section class="error">
         <br>
         <br><br>
-        <img style="width: 60px;" src="images/tsu-seal.png"><br><br>
+        <img style="width: 60px; padding-bottom: 20px;" src="images/tsu-seal.png"><br><br>
         <a href="edit.php" class="custom-btn">Edit Profile</a>
         <br>
         <br>
-        <h1 class="office-window-title">List of Your Schedules</h1>
+        <h1 class="office-window-title" style="padding: 20px 0px;">List of Your Schedules</h1>
         
         <a href="booking-page.html" class="custom-btn">BACK</a>
         <br>
@@ -101,19 +101,5 @@ $result = $stmt->get_result();
     ?>
     </section>
 
-    <footer class="footer">
-        <div class="social">
-            <a href="" target="_blank"><i class="ti ti-brand-facebook"></i></a>
-            <a href="" target="_blank"><i class="ti ti-brand-x-filled"></i></a>
-            <a href="" target="_blank"><i class="ti ti-brand-instagram-filled"></i></a>
-        </div>
-        <ul class="list">
-            <li><a href="booking-page.html">Booking</a></li>
-            <li><a href="user-dashboard.html">Profile</a></li>
-        </ul>
-        <p class="copyright"> 
-            @ Tarlac State University | All Rights Reserved
-        </p>
-    </footer>
 </body>
 </html>
