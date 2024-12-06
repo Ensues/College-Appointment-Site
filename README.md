@@ -7,36 +7,24 @@ The TSU Registrar's Office oversees critical functions such as student record ma
 
 ## Features
 
-### Homepage
-- Welcoming text explaining the site's purpose.
-- Quick access buttons for appointment scheduling, support, and FAQs.
-- Announcement section for important notices (e.g., system maintenance, peak times).
+### Log in Page
+- Provides functionality to log in the system
 
+### Sign Up Page
+- Provides functionality to create an account for the user to log in the page
+  
 ### Appointment Booking Page
-- User-friendly booking form for selecting service types, dates, and times.
-- Interactive calendar view showing available slots.
-- Automated confirmation and reminder notifications via email/SMS.
+- User-friendly booking form for selecting dates, and times.
 - Secure login integrated with the TSU student portal.
 
 ### User Dashboard
 - Overview of upcoming appointments with options to modify or cancel.
-- Appointment history section for viewing past bookings and feedback.
+- Appointment history section for viewing present bookings.
 
-### Support and Help Page
-- Comprehensive FAQ section for common issues.
-- Contact form for reaching out with questions or reporting problems.
-
-### Feedback Page
-- Form for submitting user feedback and suggestions.
-- Brief guidelines for effective feedback.
-
-### Header and Footer
+### Header NavBar
 - Navigation tabs for easy site access.
 - TSU logo for branding.
-- Social media links and contact information in the footer.
 
-### Back to Top Button
-- Quick navigation to return to the top of the page.
 
 ## Installation
 
@@ -58,20 +46,16 @@ The TSU Registrar's Office oversees critical functions such as student record ma
     ```
 
 ## Usage
-- Visit the homepage for an overview and important announcements.
-- Schedule, modify, or cancel appointments via the appointment booking page.
+- Log in or Sign up if user has no account
+- Select a window from booking page
+- Schedule an appointment from available time slots.
 - Use the user dashboard to manage your appointment history.
-- Access the support page for FAQs or submit issues through the contact form.
-- Provide feedback to help improve the system.
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
 
 ## Contributing
 Contributions are welcome! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines.
-
-## License
-This project is licensed under the [MIT License](LICENSE).
 
 ---
 
