@@ -105,7 +105,7 @@ $conn->close();
                                 <td>".$row["appointment_date"]."</td>
                                 <td>".$row["appointment_time"]."</td>
                                 <td>".$row["status"]."</td>
-                                <td><a href='/WebProg/TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/book.php?id=$row[id]' class='custom-btn'>BOOK</a></td>
+                                <td><a href='book.php?id=$row[id]' class='custom-btn'>BOOK</a></td>
                             </tr>";
                         }
                         } else {
