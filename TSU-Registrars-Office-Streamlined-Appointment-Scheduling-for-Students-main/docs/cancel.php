@@ -47,7 +47,7 @@ if (isset($_GET["id"])) {
                 $updateStmt->bind_param("ss", $schedule_date, $schedule_time);
 
                 if ($updateStmt->execute()) {
-                    header("Location: /WebProg/TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/booking-page.html?status=canceled");
+                    header("Location: booking-page.html?status=canceled");
                     exit;
                 } else {
                     echo "Error updating appointment status: " . $conn->error;
