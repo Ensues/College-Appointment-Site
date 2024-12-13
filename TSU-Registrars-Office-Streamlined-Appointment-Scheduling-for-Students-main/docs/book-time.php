@@ -19,10 +19,10 @@ if(isset($_GET['date'])){
     }
 }
 
-// Submitting Info
+// Submitting Info to the Database
 if(isset($_POST['submit'])){
     // $name = $_POST['name'];
-    // email = $_POST['transactionType']
+    // $email = $_POST['transactionType']
     $timeslot = $_POST['timeslot'];
     $stmt = $mysqli -> prepare('select * from bookings where date = ? AND timeslot = ?');
     $stmt -> bind_param('ss', $date, $timeslot);
@@ -43,11 +43,14 @@ if(isset($_POST['submit'])){
 }
 
 // Time Slot Logic
+// Duration is how long the booking is for, for each slot, cleanup tbh idk, start is start time until the end var
 
 $duration = 10;
 $cleanup = 0;
 $start = "08:00";
 $end = "17:00";
+
+// This function creates the specific time slots
 
 function timeslots($duration, $cleanup, $start, $end){
     $start = new DateTime($start);
@@ -55,7 +58,6 @@ function timeslots($duration, $cleanup, $start, $end){
     $interval = new DateInterval("PT".$duration."M");
     $cleanupInterval = new DateInterval("PT".$cleanup."M");
     $slots = array();
-
 
     for($intStart = $start; $intStart<$end; $intStart->add($interval)->add($cleanupInterval)){
         $endPeriod = clone $intStart;
@@ -191,6 +193,7 @@ function timeslots($duration, $cleanup, $start, $end){
                 ?>
                 <div class="col-md-2">
                     <div class="form-group">
+                        <!-- Determines if the time is vailable or not -->
                         <?php if(in_array($ts, $bookings)){ ?>
                             <button class="btn btn-danger book"><?php echo $ts; ?></button>
                         <?php }else{ ?>
@@ -202,15 +205,17 @@ function timeslots($duration, $cleanup, $start, $end){
                 <?php } ?>
                 <div class="col-md-6 col-md-offset-3">
                 <form action="calendar.php" method="get" style="text-align: center;">
+                    <!-- Return back to calendar -->
                     <button class="btn btn-primary" type="submit">Back</button>
                 </form>
                 </div>
             </div>
+
             <!-- Modal -->
             <div id="myModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
 
-                    <!-- Modal content-->
+                    <!-- Modal content / thing that pops up after clicking a timeslot-->
                     <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -220,6 +225,7 @@ function timeslots($duration, $cleanup, $start, $end){
                         <div class="row">
                             <div class="col-md-12">
                                 <form action="" method="post">
+                                    <!-- specific items that appears in the modal -->
                                     <div class="form-group">
                                         <label for="">Timeslot</label>
                                         <input type="text" readonly name="timeslot" id="timeslot" class="form-control">
@@ -252,6 +258,7 @@ function timeslots($duration, $cleanup, $start, $end){
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384- Tc5lQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA712mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"> </script>
         <script>
+            // shows modal
             $(".book").click(function(){
                 var timeslot = $(this).attr('data-timeslot');
                 $("#slot").html(timeslot);

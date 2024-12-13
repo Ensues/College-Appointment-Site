@@ -1,6 +1,10 @@
 f<?php
 function build_calendar($month, $year) {
 
+    // Date is TEXT
+    // Timeslot is DATE
+
+
     // Database connection
     $mysqli = new mysqli('localhost', 'root', '', 'bookingcalendar');
     /*
