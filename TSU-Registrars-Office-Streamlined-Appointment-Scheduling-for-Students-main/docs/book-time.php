@@ -147,8 +147,7 @@ function timeslots($duration, $cleanup, $start, $end){
     </head>
     <body>
         <div class="container">
-            <h1 class="text-center"> Book for Date: <?php echo $date ?> </h1><hr>
-        <!-- idk where that "class==" coming from lmao -->
+            <h1 class="text-center"> Book for Date: <?php echo date('m/d/Y', strtotime($date)); ?> </h1><hr>
             
             <div class="row">
                 <?php $timeslots = timeslots($duration, $cleanup, $start, $end);
@@ -164,20 +163,6 @@ function timeslots($duration, $cleanup, $start, $end){
                 <form action="calendar.php" method="get" style="text-align: center;">
                     <button class="btn btn-primary" type="submit">Back</button>
                 </form>
-                </div>
-                <div class="col-md-6 col-md-offset-3">
-                    <?php echo isset($msg)?$msg:'';?>
-                    <form action="" method="post">
-                        <div class="form-group">
-                            <label for="">Name</label>
-                            <input type="text" class="form-control" name="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Email</label>
-                            <input type="email" class="form-control" name="email">
-                        </div>
-                        <button class="btn btn-primary" type="submit" style='text-align: center;'>Submit</button>
-                    </form>
                 </div>
             </div>
         </div>
