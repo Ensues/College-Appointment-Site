@@ -1,7 +1,7 @@
 f<?php
 function build_calendar($month, $year) {
 
-    // Database
+    // Database connection
     $mysqli = new mysqli('localhost', 'root', '', 'bookingcalendar');
     /*
     $stmt = $mysqli -> prepare('select * from bookings where MONTH(date) = ? AND YEAR(date) = ?');
@@ -87,12 +87,15 @@ function build_calendar($month, $year) {
             $dayOfWeek = 0;
             $calendar .= "</tr><tr>";
         }
-        
+
+        // Initialization of variables relating to the calendar        
         $currentDayRel = str_pad($currentDay,2,"0", STR_PAD_LEFT);
         $date = "$year-$month-$currentDayRel";
         $dayName = strtolower(date("l", strtotime($date)));
         $eventNum = 0;
         $today = $date==date('Y-m-d')?"today":"";
+
+        // If... else loop that determines the availability of the day (Workdays Only > Present and Future Days > Remaining Available)
         if($dayName == 'saturday' || $dayName == 'sunday' || $dayName == 'monday'){
             $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-danger btn-xs'>Closed Office</a>";
         }elseif($date<date('Y-m-d')){
@@ -119,6 +122,7 @@ function build_calendar($month, $year) {
     }
 
     //Completing the row of the last week in month, if necessary
+
     if($dayOfWeek < 7){
         $remainingDays = 7-$dayOfWeek;
         for($i=0;$i<$remainingDays;$i++){
@@ -131,6 +135,8 @@ function build_calendar($month, $year) {
     return $calendar;
     
 }
+
+
 
 function checkSlots($mysqli, $date){
     $stmt = $mysqli -> prepare('select * from bookings where date = ?');
@@ -258,7 +264,9 @@ function checkSlots($mysqli, $date){
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+
                 <?php
+
                 $dateComponents = getdate();
                 if(isset($_GET['month']) && isset($_GET['year'])){
                     $month = $_GET['month'];
@@ -267,10 +275,13 @@ function checkSlots($mysqli, $date){
                     $month = $dateComponents['mon'];
                     $year = $dateComponents['year'];
                 }
+                
+                // Builds the calendar
 
                 echo build_calendar($month, $year);
                 
                 ?>
+
             </div>
             <form action="booking-page.html" method="get" style="text-align: center;">
                     <button class="btn btn-primary" type="submit">Back</button>
