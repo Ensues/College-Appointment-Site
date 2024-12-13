@@ -3,6 +3,7 @@ function build_calendar($month, $year) {
 
     // Database
     $mysqli = new mysqli('localhost', 'root', '', 'bookingcalendar');
+    /*
     $stmt = $mysqli -> prepare('select * from bookings where MONTH(date) = ? AND YEAR(date) = ?');
     $stmt -> bind_param('ss', $month, $year);
     $bookings = array();
@@ -15,6 +16,8 @@ function build_calendar($month, $year) {
             $stmt->close();
         }
     }
+    */
+    $bookings = array();
 
 
     // Initializing days of the week
