@@ -1,4 +1,4 @@
-<?php
+f<?php
 function build_calendar($month, $year) {
 
     // Database
@@ -87,8 +87,9 @@ function build_calendar($month, $year) {
         $currentDayRel = str_pad($currentDay,2,"0", STR_PAD_LEFT);
         $date = "$year-$month-$currentDayRel";
         $dayName = strtolower(date("I", strtotime($date)));
+        $eventNum = 0;
         $today = $date==date('Y-m-d')?'today':'';
-        if(in_array($date, $bookings)){
+        if(in_array($date, $bookings) OR $date<date('Y-m-d')){
             $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-danger btn-xs'>Booked</a></td>";
         }else{
             $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-success btn-xs'>Book</a></td>";
