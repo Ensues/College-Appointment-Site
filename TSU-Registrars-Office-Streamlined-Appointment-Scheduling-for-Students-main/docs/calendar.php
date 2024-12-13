@@ -241,6 +241,9 @@ function build_calendar($month, $year) {
                 
                 ?>
             </div>
+            <form action="booking-page.html" method="get" style="text-align: center;">
+                    <button class="btn btn-primary" type="submit">Back</button>
+            </form>
         </div>
     </div>
     
