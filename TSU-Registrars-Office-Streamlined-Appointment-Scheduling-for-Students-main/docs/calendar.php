@@ -90,15 +90,23 @@ function build_calendar($month, $year) {
         
         $currentDayRel = str_pad($currentDay,2,"0", STR_PAD_LEFT);
         $date = "$year-$month-$currentDayRel";
-        $dayName = strtolower(date("I", strtotime($date)));
+        $dayName = strtolower(date("l", strtotime($date)));
         $eventNum = 0;
-        $today = $date==date('Y-m-d')?'today':'';
-        if(in_array($date, $bookings)){
-            $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-danger btn-xs'>Booked</a>";
+        $today = $date==date('Y-m-d')?"today":"";
+        if($dayName == 'saturday' || $dayName == 'sunday' || $dayName == 'monday'){
+            $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-danger btn-xs'>Closed Office</a>";
         }elseif($date<date('Y-m-d')){
             $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-danger btn-xs'>N/A</a>";
         }else{
-            $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a href='book-time.php?date=".$date."' class='btn btn-success btn-xs'>Book</a>";
+            $totalbookings = checkSlots($mysqli, $date);
+            // We supposed to use this to limit how much people can book a day to fill it all up but tbh doubt it will ever realistically fill up
+            // Have tested it already and it works, you can change 54 to 1 and book a timeslot to check yourself
+            if($totalbookings == 54){
+                $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a href='#' class='btn btn-danger btn-xs'>All booked</a>";
+            }else{
+                $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a href='book-time.php?date=".$date."' class='btn btn-success btn-xs'>Book</a>";
+            }
+            
         }
         
         $calendar.= "</td>";
@@ -119,7 +127,25 @@ function build_calendar($month, $year) {
     $calendar .= "</tr></table>";
 
     return $calendar;
+    
+}
+
+function checkSlots($mysqli, $date){
+    $stmt = $mysqli -> prepare('select * from bookings where date = ?');
+    $stmt -> bind_param('s', $date);
+    $totalbookings = 0;
+    if($stmt->execute()){
+        $result = $stmt -> get_result();
+        if($result->num_rows > 0){
+            while($row = $result -> fetch_assoc()){
+                $totalbookings++;
+            }
+            $stmt->close();
+        }
     }
+
+    return $totalbookings;
+}
 
 ?>
 <!DOCTYPE html>

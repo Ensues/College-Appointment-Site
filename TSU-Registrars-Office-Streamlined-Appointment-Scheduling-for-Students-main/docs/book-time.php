@@ -1,26 +1,53 @@
-<?php 
+<?php
+
+$mysqli = new mysqli('localhost', 'root', '', 'bookingcalendar');
+
+// Getting the date
 if(isset($_GET['date'])){
     $date = $_GET['date'];
+    $stmt = $mysqli -> prepare('select * from bookings where date = ?');
+    $stmt -> bind_param('s', $date);
+    $bookings = array();
+    if($stmt->execute()){
+        $result = $stmt -> get_result();
+        if($result->num_rows > 0){
+            while($row = $result -> fetch_assoc()){
+                $bookings[] = $row['timeslot'];
+            }
+            $stmt->close();
+        }
+    }
 }
 
+// Submitting Info
 if(isset($_POST['submit'])){
     // $name = $_POST['name'];
     // email = $_POST['transactionType']
-    $date = $_POST['date'];
     $timeslot = $_POST['timeslot'];
-    $mysqli = new mysqli('localhost', 'root', '', 'bookingcalendar');
-    $stmt = $mysqli -> prepare("INSERT INTO bookings (timeslot, date) VALUES (?, ?)");
-    $stmt->bind_param("ss", $timeslot, $date);
-    $stmt -> execute();
-    $msg = "<div class='alert alert-success'>Booking Successfull</div>";
-    $stmt -> close();
-    $mysqli -> close();
+    $stmt = $mysqli -> prepare('select * from bookings where date = ? AND timeslot = ?');
+    $stmt -> bind_param('ss', $date, $timeslot);
+    if($stmt->execute()){
+        $result = $stmt -> get_result();
+        if($result->num_rows > 0){
+            $msg = "<div class='alert alert-danger'>Already Booked</div>";
+        }else{
+            $stmt = $mysqli -> prepare("INSERT INTO bookings (timeslot, date) VALUES (?, ?)");
+            $stmt -> bind_param("ss", $timeslot, $date);
+            $stmt -> execute();
+            $msg = "<div class='alert alert-success'>Booking Successfull</div>";
+            $bookings[]=$timeslot;
+            $stmt -> close();
+            $mysqli -> close();
+        }
+    }
 }
+
+// Time Slot Logic
 
 $duration = 10;
 $cleanup = 0;
-$start = "09:00";
-$end = "15:00";
+$start = "08:00";
+$end = "17:00";
 
 function timeslots($duration, $cleanup, $start, $end){
     $start = new DateTime($start);
@@ -41,6 +68,7 @@ function timeslots($duration, $cleanup, $start, $end){
     return $slots;
 }
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -163,7 +191,12 @@ function timeslots($duration, $cleanup, $start, $end){
                 ?>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <button class="btn btn-success book" data-timeslot="<?php echo $ts; ?>"><?php echo $ts; ?></button>
+                        <?php if(in_array($ts, $bookings)){ ?>
+                            <button class="btn btn-danger book"><?php echo $ts; ?></button>
+                        <?php }else{ ?>
+                            <button class="btn btn-success book" data-timeslot="<?php echo $ts; ?>"><?php echo $ts; ?></button>
+                        <?php } ?>
+                        
                     </div>
                 </div>
                 <?php } ?>
@@ -181,7 +214,7 @@ function timeslots($duration, $cleanup, $start, $end){
                     <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Booking: <span id="slot"></span></h4>
+                        <h4 class="modal-title">Confirmation</span></h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
