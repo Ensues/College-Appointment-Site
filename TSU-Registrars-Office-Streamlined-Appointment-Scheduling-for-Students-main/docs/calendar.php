@@ -90,13 +90,14 @@ function build_calendar($month, $year) {
         $eventNum = 0;
         $today = $date==date('Y-m-d')?'today':'';
         if(in_array($date, $bookings)){
-            $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-danger btn-xs'>Booked</a></td>";
+            $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-danger btn-xs'>Booked</a>";
         }elseif($date<date('Y-m-d')){
-            $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-danger btn-xs'>N/A</a></td>";
+            $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-danger btn-xs'>N/A</a>";
         }else{
-            $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-success btn-xs'>Book</a></td>";
+            $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a href='book-time.php?date=".$date." class='btn btn-success btn-xs''>Book</a>";
         }
         
+        $calendar.= "</td>";
 
         //Incrementing counters
         $currentDay++;
