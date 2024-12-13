@@ -89,8 +89,10 @@ function build_calendar($month, $year) {
         $dayName = strtolower(date("I", strtotime($date)));
         $eventNum = 0;
         $today = $date==date('Y-m-d')?'today':'';
-        if(in_array($date, $bookings) OR $date<date('Y-m-d')){
+        if(in_array($date, $bookings)){
             $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-danger btn-xs'>Booked</a></td>";
+        }elseif($date<date('Y-m-d')){
+            $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-danger btn-xs'>N/A</a></td>";
         }else{
             $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a class='btn btn-success btn-xs'>Book</a></td>";
         }
