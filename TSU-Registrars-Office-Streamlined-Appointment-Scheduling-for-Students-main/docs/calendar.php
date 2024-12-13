@@ -104,7 +104,9 @@ function build_calendar($month, $year) {
             if($totalbookings == 54){
                 $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a href='#' class='btn btn-danger btn-xs'>All booked</a>";
             }else{
-                $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a href='book-time.php?date=".$date."' class='btn btn-success btn-xs'>Book</a>";
+                // If changing the total bookings available per day, change this
+                $availableslots = 54 - $totalbookings;
+                $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a href='book-time.php?date=".$date."' class='btn btn-success btn-xs'>Book</a> <small><i>$availableslots slots left</i></small>";
             }
             
         }
