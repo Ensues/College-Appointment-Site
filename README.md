@@ -25,6 +25,10 @@ The TSU Registrar's Office oversees critical functions such as student record ma
 - Navigation tabs for easy site access.
 - TSU logo for branding.
 
+### Time Slot Management
+Dynamic generation of time slots based on availability.
+Real-time updates on booked slots to prevent double bookings.
+
 
 ## Installation
 
