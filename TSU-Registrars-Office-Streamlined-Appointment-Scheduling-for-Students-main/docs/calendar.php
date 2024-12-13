@@ -12,7 +12,8 @@ function build_calendar($month, $year) {
             while($row = $result -> fetch_assoc()){
                 $bookings[] = $row['date'];
             }
-        $stmt->close();
+            $stmt->close();
+        }
     }
 
 
@@ -116,7 +117,6 @@ function build_calendar($month, $year) {
 
     return $calendar;
     }
-}
 
 ?>
 <!DOCTYPE html>

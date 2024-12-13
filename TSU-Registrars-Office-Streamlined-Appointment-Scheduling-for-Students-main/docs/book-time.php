@@ -3,6 +3,15 @@ if(isset($_GET['date'])){
     $date = $_GET['date'];
 }
 
+if(isset($_POST['submit'])){
+    $mysqli = new mysqli('localhost', 'root', '', 'bookingcalendar');
+    $stmt = $mysqli -> prepare("INSERT INTO bookings (date) VALUES (?)");
+    $stmt -> execute();
+    $msg = "<div class='alert alert-success'>Booking Successfull</div>";
+    $stmt -> close();
+    $mysqli -> close();
+}
+
 $duration = 10;
 $cleanup = 0;
 $start = "09:00";
@@ -138,10 +147,12 @@ function timeslots($duration, $cleanup, $start, $end){
     </head>
     <body>
         <div class="container">
-            <h1 class="text-center"> Book for Date: <?php echo date('m/d/Y', strtotime($date)); ?> </h1><hr>
+            <h1 class="text-center"> Book for Date: <?php echo $date ?> </h1><hr>
+        <!-- idk where that "class==" coming from lmao -->
+            
             <div class="row">
                 <?php $timeslots = timeslots($duration, $cleanup, $start, $end);
-                    foreach($timeslots as $ts){               
+                    foreach($timeslots as $ts){              
                 ?>
                 <div class="col-md-2">
                     <div class="form-group">
@@ -150,9 +161,23 @@ function timeslots($duration, $cleanup, $start, $end){
                 </div>
                 <?php } ?>
                 <div class="col-md-6 col-md-offset-3">
-                <form action="calendar.php" method="get" style="text-align: center; margin-top: 10px">
+                <form action="calendar.php" method="get" style="text-align: center;">
                     <button class="btn btn-primary" type="submit">Back</button>
                 </form>
+                </div>
+                <div class="col-md-6 col-md-offset-3">
+                    <?php echo isset($msg)?$msg:'';?>
+                    <form action="" method="post">
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input type="text" class="form-control" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input type="email" class="form-control" name="email">
+                        </div>
+                        <button class="btn btn-primary" type="submit" style='text-align: center;'>Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
