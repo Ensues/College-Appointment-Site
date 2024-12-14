@@ -302,6 +302,7 @@ function timeslots($duration, $cleanup, $start, $end){
                                                 <option value="Request OR/CR">Request OR/CR</option>
                                                 <option value="Request TOR">Request TOR</option>
                                                 <option value="Request Diploma">Request Diploma</option>
+                                                <option value="Request Transferee Form">Request Transferee Form</option>
                                                 <option value="Request Other Document">Request Other Document</option>
                                             <?php endif; ?>
                                         </select>
