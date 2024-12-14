@@ -27,9 +27,18 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $new_name = $_POST['name'];
     $new_username = $_POST['username'];
     $new_password = $_POST['password'];
     $current_password = $_POST['current_password'];
+
+    // Handle name change
+    if (!empty($new_name) && $new_name !== $user['name']) {
+        $stmt = $conn->prepare("UPDATE users SET name = ? WHERE id = ?");
+        $stmt->bind_param("si", $new_name, $user_id);
+        $stmt->execute();
+        $name_message = "Name updated successfully!";
+    }
 
     // Handle password change
     if (!empty($new_password)) {
@@ -59,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username_message = "Username updated successfully!";
     }
 }
+
 
 $conn->close();
 ?>
@@ -91,24 +101,34 @@ $conn->close();
     </header>
 
     <section class="log-in">
-        <h2 class="log-header" style="padding-top: 50px;">Hello, <?php echo htmlspecialchars($user['name']); ?>. Do you want to edit your profile?</h2>
+        <h2 class="log-header" style="padding-top: 50px;">
+            Hello, <?php echo htmlspecialchars($user['name']); ?>. Do you want to edit your profile?
+        </h2>
 
+        <?php if (isset($name_message)) { echo "<script>showAlert('$name_message');</script>"; } ?>
         <?php if (isset($username_message)) { echo "<script>showAlert('$username_message');</script>"; } ?>
         <?php if (isset($password_message)) { echo "<script>showAlert('$password_message');</script>"; } ?>
 
         <form method="POST">
             <div class="input-box">
                 
+                <input type="text" id="name" name="name" placeholder="Enter new name">
+                
+                <label class="log-header" for="username">Username</label>
                 <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" placeholder="Enter new username">
+
                 <label class="log-header" for="current_password">Current Password</label>
                 <input type="password" id="current_password" name="current_password" placeholder="Enter your current password">
+                
                 <label class="log-header" for="password">New Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter new password">
+
                 <button type="submit" class="btn">Save Changes</button>
                 <a href="user-dashboard.php" class="btn bypass-btn guest-log-in">BACK</a>
             </div>
         </form>
     </section>
+
 
     <script src="script.js"></script>
 </body>

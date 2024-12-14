@@ -7,6 +7,23 @@ if (!isset($_SESSION['user_id'])) {
 }
 $mysqli = new mysqli('localhost', 'root', '', 'booking_system');
 
+// Fetch the logged-in user's name
+$user_id = $_SESSION['user_id'];
+$user = null;
+$stmt = $mysqli->prepare("SELECT name FROM users WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+
+if ($stmt->execute()) {
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+    }
+    $stmt->close();
+}
+
+if (!$user) {
+    die("User not found.");
+}
 $sql = "SELECT appointment_date, appointment_time, status FROM appointments WHERE office_window = ? AND status = 'available' ORDER BY appointment_date, appointment_time";
     $bookings = array();
     $window = $_GET['window'] ?? '';
@@ -241,7 +258,7 @@ function timeslots($duration, $cleanup, $start, $end){
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <form action="" method="post">
+                                <form action=""id="bookingForm" method="post">
                                     <div class="form-group">
                                         <label for="">Timeslot</label>
                                         <input type="text" readonly name="timeslot" id="timeslot" class="form-control">
@@ -250,12 +267,11 @@ function timeslots($duration, $cleanup, $start, $end){
                                         <label for="">Date</label>
                                         <input type="text" readonly name="date" id="date" class="form-control" value="<?php echo date('m/d/Y', strtotime($date)); ?>">
                                     </div>
-                                    <!--
                                     <div class="form-group">
-                                        <label for="">Name</label>
-                                        <input type="text" readonly name="Name" id="Name" class="form-control" value="<?php echo htmlspecialchars($user['name']); ?>">
-                                    </div>-->
-                                    <!-- Transaction Type Dropdown -->
+                                        <label for="name">Name</label>
+                                        <input type="text" readonly name="name" id="name" class="form-control" value="<?php echo htmlspecialchars($user['name']); ?>">
+                                    </div>
+
                                     <div class="form-group">
                                         <label for="transactionType">Transaction Type</label>
                                         <select name="transactionType" id="transactionType" class="form-control" required>
@@ -311,6 +327,14 @@ function timeslots($duration, $cleanup, $start, $end){
                 $("#timeslot").val(timeslot);
                 $("#myModal").modal("show");
             })
+            $("#bookingForm").on("submit", function(event) {
+                var timeslot = $("#timeslot").val();
+                if (!timeslot) {
+                    event.preventDefault(); 
+                    alert("This timeslot is already booked."); 
+                }
+            });
+
         </script>
     </body>
 </html>
