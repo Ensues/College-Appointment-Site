@@ -53,11 +53,7 @@ $conn->close();
         <form method="POST">
             <div class="img-container">
                 <div class="login-wrapper">
-<<<<<<< HEAD:TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/signup.php
-                 <div class="input-box">
-=======
                     <div class="input-box">
->>>>>>> origin/Paikuu-patch-1:WebProg-FT-Case-Study/docs/signup.php
                         <h1 class="log-header">Sign Up</h1>
                         <input type="text" name="name" placeholder="Full Name" required>
                         <input type="text" name="username" placeholder="Username" required> 
