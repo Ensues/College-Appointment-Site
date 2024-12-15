@@ -101,13 +101,9 @@ $conn->close();
     </header>
 
     <section class="log-in">
-<<<<<<< HEAD:TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/edit.php
-        <h2 class="log-header" style="padding-top: 50px;">Hello, <?php echo htmlspecialchars($user['name']); ?>. Do you want to edit your profile?</h2>
-=======
         <h2 class="log-header" style="padding-top: 50px;">
             Hello, <?php echo htmlspecialchars($user['name']); ?>. Do you want to edit your profile?
         </h2>
->>>>>>> origin/Paikuu-patch-1:WebProg-FT-Case-Study/docs/edit.php
 
         <?php if (isset($name_message)) { echo "<script>showAlert('$name_message');</script>"; } ?>
         <?php if (isset($username_message)) { echo "<script>showAlert('$username_message');</script>"; } ?>
@@ -133,10 +129,7 @@ $conn->close();
         </form>
     </section>
 
-<<<<<<< HEAD:TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/edit.php
-=======
 
->>>>>>> origin/Paikuu-patch-1:WebProg-FT-Case-Study/docs/edit.php
     <script src="script.js"></script>
 </body>
 </html>
