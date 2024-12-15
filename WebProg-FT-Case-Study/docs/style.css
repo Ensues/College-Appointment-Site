@@ -512,7 +512,7 @@ body.light-mode {
 /* Office Window Buttons */
 .office-window-title{
     color:var(--tsu-yellow-color);
-    font-size: 5em;
+    font-size: 3em;
     border-radius: 5px;
     margin: 5px;
     text-align: center;
