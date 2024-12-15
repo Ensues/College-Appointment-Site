@@ -126,7 +126,7 @@ function timeslots($duration, $cleanup, $start, $end){
     </head>
     <body>
         <header class="header">
-            <a href="#home" class="logo"> <img src="images/tsu-seal.png"> TSU <span>Registrar</span></a>
+            <a class="logo"> <img src="images/tsu-seal.png"> TSU <span>Registrar</span></a>
         </header>
         <div class="container" style="padding-top: 50px">
         <h1 class="text-center"> Book for Date: <?php echo date('m/d/Y', strtotime($date)); ?> </h1><hr>
