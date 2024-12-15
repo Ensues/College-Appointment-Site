@@ -65,20 +65,11 @@ $conn->close();
             </form>
         </section>
 
-<<<<<<< HEAD:TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/index.php
-            <?php if (isset($alertMessage)) { ?>
-                <script>
-                    alert("<?php echo $alertMessage; ?>");
-                </script>
-            <?php } ?>
-
-=======
         <?php if (isset($alertMessage)) { ?>
             <script>
                 alert("<?php echo $alertMessage; ?>");
             </script>
         <?php } ?>
->>>>>>> origin/Paikuu-patch-1:WebProg-FT-Case-Study/docs/index.php
 
         <script src="script.js"></script>
     </body>
