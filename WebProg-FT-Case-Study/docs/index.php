@@ -8,10 +8,10 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $conn->real_escape_string($_POST['email']);
+    $username = $conn->real_escape_string($_POST['username']);
     $password = $_POST['password'];
 
-    $result = $conn->query("SELECT * FROM users WHERE email = '$email'");
+    $result = $conn->query("SELECT * FROM users WHERE username = '$username'");
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
@@ -23,12 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $alertMessage = "Invalid password.";
         }
     } else {
-        $alertMessage = "No account found with that email.";
+        $alertMessage = "No account found with that username.";
     }
 }
 
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,21 +55,30 @@ $conn->close();
                     <div class="login-wrapper">
                         <div class="input-box">
                             <h1 class="log-header">Log In</h1>
-                            <input type="email" name="email" id="email" placeholder="Email" required>
+                            <input type="text" name="username" id="username" placeholder="Username" required>
                             <input type="password" name="password" id="password" placeholder="Password" required>
                             <button type="submit" class="btn">Log In</button>
-                            <a href="signup.php" id="login-btn" class="btn bypass-btn guest-log-in">Sign In</a>                       
+                            <a href="signup.php" id="login-btn" class="btn bypass-btn guest-log-in">Sign Up</a>                       
                         </div>
                     </div>
-                </form>
-            </section>
+                </div>
+            </form>
+        </section>
 
+<<<<<<< HEAD:TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/index.php
             <?php if (isset($alertMessage)) { ?>
                 <script>
                     alert("<?php echo $alertMessage; ?>");
                 </script>
             <?php } ?>
 
+=======
+        <?php if (isset($alertMessage)) { ?>
+            <script>
+                alert("<?php echo $alertMessage; ?>");
+            </script>
+        <?php } ?>
+>>>>>>> origin/Paikuu-patch-1:WebProg-FT-Case-Study/docs/index.php
 
         <script src="script.js"></script>
     </body>

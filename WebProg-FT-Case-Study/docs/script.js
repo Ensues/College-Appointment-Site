@@ -58,7 +58,7 @@ document.getElementById('theme-toggle').addEventListener('click', function() {
 });
 
 function redirectToSchedule(windowName) {
-  const url = `sched.php?window=${encodeURIComponent(windowName)}`;
+  const url = `calendar.php?window=${encodeURIComponent(windowName)}`;
   window.location.href = url;
 }
 function showAlert(message) {

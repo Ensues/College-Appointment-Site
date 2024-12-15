@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -19,7 +19,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT name, email FROM users WHERE id = ?";
+$sql = "SELECT name, username FROM users WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -27,10 +27,20 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $new_email = $_POST['email'];
+    $new_name = $_POST['name'];
+    $new_username = $_POST['username'];
     $new_password = $_POST['password'];
     $current_password = $_POST['current_password'];
 
+    // Handle name change
+    if (!empty($new_name) && $new_name !== $user['name']) {
+        $stmt = $conn->prepare("UPDATE users SET name = ? WHERE id = ?");
+        $stmt->bind_param("si", $new_name, $user_id);
+        $stmt->execute();
+        $name_message = "Name updated successfully!";
+    }
+
+    // Handle password change
     if (!empty($new_password)) {
         $stmt = $conn->prepare("SELECT password FROM users WHERE id = ?");
         $stmt->bind_param("i", $user_id);
@@ -49,16 +59,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $password_message = "Current password is incorrect.";
         }
     }
-    if (!empty($new_email) && $new_email !== $user['email']) {
-        $stmt = $conn->prepare("UPDATE users SET email = ? WHERE id = ?");
-        $stmt->bind_param("si", $new_email, $user_id);
+
+    // Handle username change
+    if (!empty($new_username) && $new_username !== $user['username']) {
+        $stmt = $conn->prepare("UPDATE users SET username = ? WHERE id = ?");
+        $stmt->bind_param("si", $new_username, $user_id);
         $stmt->execute();
-        $email_message = "Email updated successfully!";
+        $username_message = "Username updated successfully!";
     }
 }
 
+
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -87,25 +101,43 @@ $conn->close();
     </header>
 
     <section class="log-in">
+<<<<<<< HEAD:TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/edit.php
         <h2 class="log-header" style="padding-top: 50px;">Hello, <?php echo htmlspecialchars($user['name']); ?>. Do you want to edit your profile?</h2>
+=======
+        <h2 class="log-header" style="padding-top: 50px;">
+            Hello, <?php echo htmlspecialchars($user['name']); ?>. Do you want to edit your profile?
+        </h2>
+>>>>>>> origin/Paikuu-patch-1:WebProg-FT-Case-Study/docs/edit.php
 
-        <?php if (isset($email_message)) { echo "<script>showAlert('$email_message');</script>"; } ?>
+        <?php if (isset($name_message)) { echo "<script>showAlert('$name_message');</script>"; } ?>
+        <?php if (isset($username_message)) { echo "<script>showAlert('$username_message');</script>"; } ?>
         <?php if (isset($password_message)) { echo "<script>showAlert('$password_message');</script>"; } ?>
 
         <form method="POST">
             <div class="input-box">
                 
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" placeholder="Enter new email">
+                <input type="text" id="name" name="name" placeholder="Enter new name">
+                
+                <label class="log-header" for="username">Username</label>
+                <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" placeholder="Enter new username">
+
                 <label class="log-header" for="current_password">Current Password</label>
                 <input type="password" id="current_password" name="current_password" placeholder="Enter your current password">
+                
                 <label class="log-header" for="password">New Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter new password">
+
                 <button type="submit" class="btn">Save Changes</button>
                 <a href="user-dashboard.php" class="btn bypass-btn guest-log-in">BACK</a>
             </div>
         </form>
     </section>
 
+<<<<<<< HEAD:TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/edit.php
+=======
+
+>>>>>>> origin/Paikuu-patch-1:WebProg-FT-Case-Study/docs/edit.php
     <script src="script.js"></script>
 </body>
 </html>
+

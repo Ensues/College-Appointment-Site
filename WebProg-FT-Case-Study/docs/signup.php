@@ -13,16 +13,17 @@ if ($conn->connect_error) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $conn->real_escape_string($_POST['name']);
-    $email = $conn->real_escape_string($_POST['email']);
+    $username = $conn->real_escape_string($_POST['username']);
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $result = $conn->query("SELECT id FROM users WHERE email = '$email'");
+    // Check if the username is already taken
+    $result = $conn->query("SELECT id FROM users WHERE username = '$username'");
     if ($result->num_rows > 0) {
-        $alertMessage = "Email is already registered.";
+        $alertMessage = "Username is already taken.";
     } else {
-        $conn->query("INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')");
-        $alertMessage = "Signup successful! You can now log in <3 !!.";
-        
+        // Insert the new user into the users table
+        $conn->query("INSERT INTO users (name, username, password) VALUES ('$name', '$username', '$password')");
+        $alertMessage = "Signup successful. You can now login your account.";
     }
 }
 
@@ -52,10 +53,14 @@ $conn->close();
         <form method="POST">
             <div class="img-container">
                 <div class="login-wrapper">
+<<<<<<< HEAD:TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/signup.php
                  <div class="input-box">
+=======
+                    <div class="input-box">
+>>>>>>> origin/Paikuu-patch-1:WebProg-FT-Case-Study/docs/signup.php
                         <h1 class="log-header">Sign Up</h1>
                         <input type="text" name="name" placeholder="Full Name" required>
-                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="text" name="username" placeholder="Username" required> 
                         <input type="password" name="password" placeholder="Password" required>
                         <button type="submit" class="btn">Sign Up</button>
                         <a href="index.php" class="btn bypass-btn guest-log-in">Back</a>

@@ -1,4 +1,5 @@
 f<?php
+<<<<<<< HEAD:TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/calendar.php
 function build_calendar($month, $year) {
 
     // Date is TEXT
@@ -7,6 +8,18 @@ function build_calendar($month, $year) {
 
     // Database connection
     $mysqli = new mysqli('localhost', 'root', '', 'bookingcalendar');
+=======
+session_start(); 
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
+function build_calendar($month, $year) {
+
+    // Database connection
+    $mysqli = new mysqli('localhost', 'root', '', 'booking_system');
+>>>>>>> origin/Paikuu-patch-1:WebProg-FT-Case-Study/docs/calendar.php
     /*
     $stmt = $mysqli -> prepare('select * from bookings where MONTH(date) = ? AND YEAR(date) = ?');
     $stmt -> bind_param('ss', $month, $year);
@@ -21,6 +34,14 @@ function build_calendar($month, $year) {
         }
     }
     */
+<<<<<<< HEAD:TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/calendar.php
+=======
+    $sql = "SELECT appointment_date, appointment_time, status FROM appointments WHERE office_window = ? AND status = 'available' ORDER BY appointment_date, appointment_time";
+    $bookings = array();
+    $window = $_GET['window'] ?? '';
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $window);
+>>>>>>> origin/Paikuu-patch-1:WebProg-FT-Case-Study/docs/calendar.php
     $bookings = array();
 
 
@@ -113,7 +134,11 @@ function build_calendar($month, $year) {
             }else{
                 // If changing the total bookings available per day, change this
                 $availableslots = 54 - $totalbookings;
+<<<<<<< HEAD:TSU-Registrars-Office-Streamlined-Appointment-Scheduling-for-Students-main/docs/calendar.php
                 $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a href='book-time.php?date=".$date."' class='btn btn-success btn-xs'>Book</a> <small><i>$availableslots slots left</i></small>";
+=======
+                $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a href='book-time.php?date=".$date."&window=".$window."' class='btn btn-success btn-xs'>Book</a> <small><i>$availableslots slots left</i></small>";
+>>>>>>> origin/Paikuu-patch-1:WebProg-FT-Case-Study/docs/calendar.php
             }
             
         }
