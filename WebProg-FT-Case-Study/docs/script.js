@@ -64,4 +64,3 @@ function redirectToSchedule(windowName) {
 function showAlert(message) {
   alert(message);
 }
-
