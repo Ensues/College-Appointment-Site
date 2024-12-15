@@ -129,32 +129,34 @@ function timeslots($duration, $cleanup, $start, $end){
             <a href="#home" class="logo"> <img src="images/tsu-seal.png"> TSU <span>Registrar</span></a>
         </header>
         <div class="container" style="padding-top: 50px">
-            <h1 class="text-center"> Book for Date: <?php echo date('m/d/Y', strtotime($date)); ?> </h1><hr>
+        <h1 class="text-center"> Book for Date: <?php echo date('m/d/Y', strtotime($date)); ?> </h1><hr>
+        
+        <div class="row">
             
-            <div class="row">
-                <class class="col-md-12">
-                    <?php echo isset($msg)?$msg:"";?>
-                </class>
-                <?php $timeslots = timeslots($duration, $cleanup, $start, $end);
-                    foreach($timeslots as $ts){              
-                ?>
-                <div class="col-md-2">
+            <?php 
+            // Generate the timeslots
+            $timeslots = timeslots($duration, $cleanup, $start, $end);
+            
+            // Loop through each timeslot
+            foreach($timeslots as $ts) { 
+            ?>
+                <div class="col-6 col-md-4 col-lg-3">
                     <div class="form-group">
-                        <?php if(in_array($ts, $bookings)){ ?>
-                            <button class="btn btn-danger book"><?php echo $ts; ?></button>
-                        <?php }else{ ?>
-                            <button class="btn btn-success book" data-timeslot="<?php echo $ts; ?>"><?php echo $ts; ?></button>
+                        <?php if(in_array($ts, $bookings)) { ?>
+                            <button class="btn btn-danger book btn-block"><?php echo $ts; ?></button>
+                        <?php } else { ?>
+                            <button class="btn btn-success book btn-block" data-timeslot="<?php echo $ts; ?>"><?php echo $ts; ?></button>
                         <?php } ?>
-                        
                     </div>
                 </div>
-                <?php } ?>
-                <div class="col-md-6 col-md-offset-3">
+            <?php } ?>
+            
+            <div class="col-md-6 col-md-offset-3">
                 <form action="calendar.php" method="get" style="text-align: center;">
                     <button class="btn btn-primary" type="submit">Back</button>
                 </form>
-                </div>
             </div>
+        </div>
             <!-- Modal -->
             <div id="myModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
