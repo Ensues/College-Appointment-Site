@@ -119,106 +119,16 @@ function timeslots($duration, $cleanup, $start, $end){
             
         <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha348-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src='main.js'></script>
+        <link rel="stylesheet" href="sub-style.css">
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     
-        <style>
-            @media only screen and (max-width:760px),
-            (min-device-width:802px) and (max-device-width:1020px){
-                /* force table to not be like tables anymore */
-                table,
-                thead,
-                tbody,
-                th,
-                td,
-                tr{
-                    display: block;
-                }
-
-                .empty{
-                    display: none;
-                }
-
-                /* Hide table headers (but not display: none;, for accessibility) */
-                th{
-                    position: absolute;
-                    top: -9999px;
-                    left: -9999px;
-                }
-
-                tr{
-                    border: 1px solid #ccc;
-                }
-
-                td{
-                    /* Behave like a "row" */
-                    border: none;
-                    border-bottom: 1px solid #eee;
-                    position: relative;
-                    padding-left: 50%;
-                }
-
-                /* Label the data */
-                td:nth-of-type(1):before {
-                    content: "Sunday";
-                }
-                td:nth-of-type(2):before {
-                    content: "Monday";
-                }
-                td:nth-of-type(3):before {
-                    content: "Tuesday";
-                }
-                td:nth-of-type(4):before {
-                    content: "Wednesday";
-                }
-                td:nth-of-type(5):before {
-                    content: "Thursday";
-                }
-                td:nth-of-type(6):before {
-                    content: "Friday";
-                }
-                td:nth-of-type(7):before {
-                    content: "Saturday";
-                }          
-            }
-
-            /* Smartphones (portrait and landscape3) ---- */
-            @media only screen and (max-width:320px) and (max-device-width: 480px){
-                body{
-                    padding: 0;
-                    margin: 0;
-                }
-            }
-
-            /* iPads and Tablets (portrait and landscape3) ---- */
-            @media only screen and (max-width:820px) and (max-device-width: 1020px){
-                body{
-                    width: 495px;
-                }
-            }
-
-            @media(min-width:641px){
-
-                table{
-                    table-layout: fixed;
-                }
-
-                td{
-                    width: 33%;
-                }
-
-            }
-
-            .row{
-                margin-top: 20px;
-            }
-
-            .today{
-                background: yellow;
-            }
-
-        </style>
     </head>
     <body>
-        <div class="container">
+        <header class="header">
+            <a href="#home" class="logo"> <img src="images/tsu-seal.png"> TSU <span>Registrar</span></a>
+        </header>
+        <div class="container" style="padding-top: 50px">
             <h1 class="text-center"> Book for Date: <?php echo date('m/d/Y', strtotime($date)); ?> </h1><hr>
             
             <div class="row">
@@ -240,7 +150,7 @@ function timeslots($duration, $cleanup, $start, $end){
                 </div>
                 <?php } ?>
                 <div class="col-md-6 col-md-offset-3">
-                <form action="booking-page.html" method="get" style="text-align: center;">
+                <form action="calendar.php" method="get" style="text-align: center;">
                     <button class="btn btn-primary" type="submit">Back</button>
                 </form>
                 </div>
@@ -312,6 +222,7 @@ function timeslots($duration, $cleanup, $start, $end){
                                     <div class="form-group pull-right">
                                         <button class="btn btn-primary" type="submit" name="submit">Submit</button>
                                     </div>
+                                    
                                 </form>
                             </div>
                         </div>
@@ -338,5 +249,6 @@ function timeslots($duration, $cleanup, $start, $end){
             });
 
         </script>
+
     </body>
 </html>

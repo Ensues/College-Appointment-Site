@@ -30,17 +30,6 @@
     --tsu-white-color: #f0f0f0;
     --tsu-red-color: #800000; 
 
-    /* 
-    This contains already all the right colors of the TSU seal
-    Create more color declarations if want to use others
-    Ideally we should be using the main colors though
-
-    to use them, here is an example{
-    color: var(--main-color);
-    }
-    
-    Thats it good luck
-*/
 }
 html{
     font-size: 60%;
