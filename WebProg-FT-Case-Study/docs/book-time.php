@@ -154,7 +154,7 @@ function timeslots($duration, $cleanup, $start, $end){
             <?php } ?>
             
             <div class="col-md-6 col-md-offset-3">
-                <form action="booking-page.php" method="get" style="text-align: center;">
+                <form action="booking-page.html" method="get" style="text-align: center;">
                     <button class="btn btn-primary" type="submit">Back</button>
                 </form>
             </div>
