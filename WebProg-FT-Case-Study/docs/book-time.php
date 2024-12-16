@@ -144,6 +144,8 @@ function timeslots($duration, $cleanup, $start, $end){
                     <div class="form-group">
                         <?php if(in_array($ts, $bookings)) { ?>
                             <button class="btn btn-danger book btn-block"><?php echo $ts; ?></button>
+                        <?php }  else if (strtotime($ts) < strtotime('10:00:00') && date('H:i:s') > '10:00:00') { ?>
+                            <button class="btn btn-danger book btn-block"><?php echo $ts; ?></button>
                         <?php } else { ?>
                             <button class="btn btn-success book btn-block" data-timeslot="<?php echo $ts; ?>"><?php echo $ts; ?></button>
                         <?php } ?>
