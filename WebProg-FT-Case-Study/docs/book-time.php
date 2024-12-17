@@ -1,111 +1,101 @@
 <?php
-session_start(); 
+session_start();
 
+// Redirect to login page if user is not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
+
 $mysqli = new mysqli('localhost', 'root', '', 'booking_system');
+if ($mysqli->connect_error) {
+    die("Connection failed: " . $mysqli->connect_error);
+}
+
+$user_id = $_SESSION['user_id'];
 
 // Fetch the logged-in user's name
-$user_id = $_SESSION['user_id'];
-$user = null;
 $stmt = $mysqli->prepare("SELECT name FROM users WHERE id = ?");
 $stmt->bind_param("i", $user_id);
-
-if ($stmt->execute()) {
-    $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc();
-    }
-    $stmt->close();
-}
+$stmt->execute();
+$user = $stmt->get_result()->fetch_assoc();
+$stmt->close();
 
 if (!$user) {
     die("User not found.");
 }
-$sql = "SELECT appointment_date, appointment_time, status FROM appointments WHERE office_window = ? AND status = 'available' ORDER BY appointment_date, appointment_time";
-    $bookings = array();
-    $window = $_GET['window'] ?? '';
-    $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param("s", $window);
-    $bookings = array();
-// Getting the date
-if(isset($_GET['date'])){
-    $date = $_GET['date'];
-    $stmt = $mysqli -> prepare('select * from bookings where date = ?');
-    $stmt -> bind_param('s', $date);
-    $bookings = array();
-    if($stmt->execute()){
-        $result = $stmt -> get_result();
-        if($result->num_rows > 0){
-            while($row = $result -> fetch_assoc()){
-                $bookings[] = $row['timeslot'];
-            }
-            $stmt->close();
-        }
+
+// Initialize variables
+$date = $_GET['date'] ?? null;
+$window = $_GET['window'] ?? '';
+$bookings = [];
+
+if ($date) {
+    $stmt = $mysqli->prepare('SELECT timeslot FROM bookings WHERE date = ?');
+    $stmt->bind_param('s', $date);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $bookings[] = $row['timeslot'];
     }
+    $stmt->close();
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $transactionType = $_POST['transactionType'] ?? '';
+    $timeslot = $_POST['timeslot'] ?? '';
 
-// Submitting Info
-if(isset($_POST['submit'])){
-    $user_id = $_SESSION['user_id'];
-    $transactionType = $_POST['transactionType'];
-    $timeslot = $_POST['timeslot'];
-    $stmt = $mysqli -> prepare('select * from bookings where date = ? AND timeslot = ?');
-    $stmt -> bind_param('ss', $date, $timeslot);
-    if($stmt->execute()){
-        $result = $stmt -> get_result();
-        if($result->num_rows > 0){
-            $msg = "<div class='alert alert-danger'>Already Booked</div>";
-        }else{
-            $stmt = $mysqli -> prepare("INSERT INTO bookings (timeslot, date, transaction_type, user_id) VALUES (?, ?, ?, ?)");
-            $stmt -> bind_param("ssss", $timeslot, $date, $transactionType, $user_id);
-            $stmt -> execute();
-            $bookings[]=$timeslot;
-            
-        }
-        if($result->num_rows > 0){
-            $msg = "<div class='alert alert-danger'>Already Booked</div>";
-        }else{
-            $stmt = $mysqli->prepare("INSERT INTO booked_schedules (user_id, schedule_date, schedule_time, schedule_details, window, created_at) VALUES (?, ?, ?, ?,? , NOW())");
-            $stmt->bind_param("issss", $user_id, $date, $timeslot, $transactionType, $window);
-            $stmt->execute();
-            $msg = "<div class='alert alert-success'>Booking Successful</div>";
-            $bookings[] = $timeslot;
-            $stmt->close();
-            $mysqli -> close();
-        }
+    $stmt = $mysqli->prepare('SELECT * FROM bookings WHERE date = ? AND timeslot = ?');
+    $stmt->bind_param('ss', $date, $timeslot);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+
+    } else {
+        $stmt = $mysqli->prepare("INSERT INTO bookings (timeslot, date, transaction_type, user_id) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("sssi", $timeslot, $date, $transactionType, $user_id);
+        $stmt->execute();
+
+        $stmt = $mysqli->prepare("INSERT INTO booked_schedules (user_id, schedule_date, schedule_time, schedule_details, window, created_at) VALUES (?, ?, ?, ?, ?, NOW())");
+        $stmt->bind_param("issss", $user_id, $date, $timeslot, $transactionType, $window);
+        $stmt->execute();
+
+        $bookings[] = $timeslot;
     }
+    $stmt->close();
 }
 
-// Time Slot Logic
-
-$duration = 10;
-$cleanup = 0;
-$start = "08:00";
-$end = "17:00";
-
-function timeslots($duration, $cleanup, $start, $end){
+// Generate timeslots
+function generateTimeslots($duration, $cleanup, $start, $end) {
     $start = new DateTime($start);
     $end = new DateTime($end);
-    $interval = new DateInterval("PT".$duration."M");
-    $cleanupInterval = new DateInterval("PT".$cleanup."M");
-    $slots = array();
+    $interval = new DateInterval("PT{$duration}M");
+    $cleanupInterval = new DateInterval("PT{$cleanup}M");
+    $breakStart = new DateTime("12:00"); // Break start time
+    $breakEnd = new DateTime("13:00");   // Break end time
+    $slots = [];
 
-
-    for($intStart = $start; $intStart<$end; $intStart->add($interval)->add($cleanupInterval)){
+    for ($intStart = $start; $intStart < $end; $intStart->add($interval)->add($cleanupInterval)) {
         $endPeriod = clone $intStart;
-        $endPeriod -> add($interval);
-        if($endPeriod>$end){
+        $endPeriod->add($interval);
+        if ($endPeriod > $end) {
             break;
         }
-        $slots[] = $intStart->format("H:iA")."-".$endPeriod->format("H:iA");
+        // Skip slots that fall within the break time
+        if (($intStart >= $breakStart && $intStart < $breakEnd) || ($endPeriod > $breakStart && $endPeriod <= $breakEnd)) {
+            continue;
+        }
+        $slots[] = $intStart->format("H:iA") . "-" . $endPeriod->format("H:iA");
     }
     return $slots;
 }
 
+define("DURATION", 10);
+define("CLEANUP", 0);
+define("START", "08:00");
+define("END", "17:00");
+$timeslots = generateTimeslots(DURATION, CLEANUP, START, END);
 ?>
 
 <!DOCTYPE html>
@@ -129,33 +119,26 @@ function timeslots($duration, $cleanup, $start, $end){
             <a class="logo"> <img src="images/tsu-seal.png"> TSU <span>Registrar</span></a>
         </header>
         <div class="container" style="padding-top: 50px">
-        <h1 class="text-center"> Book for Date: <?php echo date('m/d/Y', strtotime($date)); ?> </h1><hr>
-        
-        <div class="row">
-            
-            <?php 
-            // Generate the timeslots
-            $timeslots = timeslots($duration, $cleanup, $start, $end);
-            
-            // Loop through each timeslot
-            foreach($timeslots as $ts) { 
-            ?>
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="form-group">
-                        <?php if(in_array($ts, $bookings)) { ?>
-                            <button class="btn btn-danger book btn-block"><?php echo $ts; ?></button>
-                        <?php } else { ?>
-                            <button class="btn btn-success book btn-block" data-timeslot="<?php echo $ts; ?>"><?php echo $ts; ?></button>
-                        <?php } ?>
+            <h1 class="text-center"> Book for Date: <?= htmlspecialchars(date('m/d/Y', strtotime($date))); ?> </h1><hr>
+            <?= $msg ?? ''; ?>
+
+            <div class="row">
+                <?php foreach ($timeslots as $ts): ?>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="form-group">
+                            <?php if (in_array($ts, $bookings)): ?>
+                                <button class="btn btn-danger btn-block" disabled><?= $ts; ?></button>
+                            <?php else: ?>
+                                <button class="btn btn-success btn-block book" data-timeslot="<?= $ts; ?>"><?= $ts; ?></button>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                </div>
-            <?php } ?>
-            
-            <div class="col-md-6 col-md-offset-3">
-                <form action="booking-page.html" method="get" style="text-align: center;">
-                    <button class="btn btn-primary" type="submit">Back</button>
-                </form>
+                <?php endforeach; ?>
             </div>
+
+            <form action="booking-page.html" method="get" class="text-center">
+                <button class="btn btn-primary" type="submit">Back</button>
+            </form>
         </div>
             <!-- Modal -->
             <div id="myModal" class="modal fade" role="dialog">

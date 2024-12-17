@@ -115,11 +115,11 @@ function build_calendar($month, $year) {
             $totalbookings = checkSlots($mysqli, $date);
             // We supposed to use this to limit how much people can book a day to fill it all up but tbh doubt it will ever realistically fill up
             // Have tested it already and it works, you can change 54 to 1 and book a timeslot to check yourself
-            if($totalbookings == 54){
+            if($totalbookings == 48){
                 $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a href='#' class='btn btn-danger btn-xs'>All booked</a>";
             }else{
                 // If changing the total bookings available per day, change this
-                $availableslots = 54 - $totalbookings;
+                $availableslots = 48 - $totalbookings;
                 $calendar.="<td class='$today'><h4>$currentDayRel</h4> <a href='book-time.php?date=".$date."&window=".$window."' class='btn btn-success btn-xs'>Book</a> <small><i>$availableslots slots left</i></small>";
             }
             
