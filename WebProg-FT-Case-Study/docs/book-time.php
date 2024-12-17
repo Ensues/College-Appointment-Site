@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-
+        $msg = "<div class='alert alert-danger'>Already Booked</div>";
     } else {
         $stmt = $mysqli->prepare("INSERT INTO bookings (timeslot, date, transaction_type, user_id) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("sssi", $timeslot, $date, $transactionType, $user_id);
