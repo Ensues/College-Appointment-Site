@@ -9,6 +9,38 @@ function build_calendar($month, $year) {
 
     // Database connection
     $mysqli = new mysqli('localhost', 'root', '', 'booking_system');
+
+    $stmt = $mysqli -> prepare('select * from windows');
+    $windows = "";
+    $first_window = 0;
+    $i = 0;
+    if($stmt->execute()){
+        $result = $stmt -> get_result();
+        if($result->num_rows > 0){
+            while($row = $result -> fetch_assoc()){
+                if($i==0){
+                    $first_room = $row['id'];
+                }
+                $windows.="<option value='".$row['id']."'>".$row['window_name']."</option>";
+                $i++;
+            }
+            $stmt->close();
+        }
+    }
+
+    $stmt = $mysqli -> prepare('select * from bookings where MONTH(date) = ? AND YEAR(date) = ? AND window_id = ?');
+    $stmt -> bind_param('ssi', $month, $year, $first_room);
+    $bookings = array();
+    if($stmt->execute()){
+        $result = $stmt -> get_result();
+        if($result->num_rows > 0){
+            while($row = $result -> fetch_assoc()){
+                $bookings[] = $row['date'];
+            }
+            $stmt->close();
+        }
+    }
+
     /*
     $stmt = $mysqli -> prepare('select * from bookings where MONTH(date) = ? AND YEAR(date) = ?');
     $stmt -> bind_param('ss', $month, $year);
@@ -67,7 +99,18 @@ function build_calendar($month, $year) {
     $calendar .= "<a class='btn btn-primary' href='?month=".$next_month."&year=".$next_year."' style='margin-bottom:10px;'>Next Month</a>";
     $calendar .= "</div>";
 
-    $calendar .= "<table class='table table-bordered'>";
+    $calendar .= "<br>
+    <form id='room_select_form'>
+    <div class='row'>
+        <div class='col-md-6 col-md-offset-3 form-group'>
+            <label>Select Window</label>
+            <select class='form-control' id='room_select'>
+                ".$windows."
+            </select>
+        </div>
+    </div>
+    
+    <table class='table table-bordered'>";
     $calendar .= "<tr>";
 
     //Creating the calendar headers
