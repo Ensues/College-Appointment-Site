@@ -1,5 +1,14 @@
 # TSU Registrar's Office Appointment Scheduling System
 
+  <p align="center">
+    <img alt="HTML" src="https://shields.io/badge/HTML-f06529?style=for-the-badge&logo=html5&logoColor=white&labelColor=f06529"/>
+    <img alt="CSS" src="https://img.shields.io/badge/CSS-239120?style=for-the-badge&logo=css3&logoColor=white"/>
+    <img alt="JavaScript" src="https://shields.io/badge/JavaScript-F7DF1E?logo=JavaScript&logoColor=000&style=for-the-badge"/>
+    <img alt="PHP" src="https://shields.io/badge/-PHP-3776AB?style=for-the-badge&logo=php&logoColor=white"/>
+    <img alt="Laravel" src="https://img.shields.io/badge/Laravel-2e2e2e?style=for-the-badge&logo=laravel&logoColor=white"/>
+    <img alt="SQL" src="https://img.shields.io/badge/-SQL-000?style=for-the-badge&logo=MySQL&logoColor=4479A1" />
+  </p>
+
 A project designed to modernize and streamline the appointment scheduling process for the Tarlac State University (TSU) Registrar's Office. The system aims to improve the efficiency of interactions, reduce wait times, and enhance student satisfaction by making a website to book appointmewnts for such interactions.
 
 ## Project Overview
